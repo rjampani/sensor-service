@@ -1,7 +1,7 @@
 #!/bin/bash
 
 sudo apt-get update
-sudo apt-get install -y openjdk-8-jre-headless maven
+sudo apt-get install -y openjdk-8-jdk-headless maven
 sudo useradd -r -m -U -d /opt/tomcat -s /bin/false tomcat
 wget https://apachemirror.wuchna.com/tomcat/tomcat-9/v9.0.46/bin/apache-tomcat-9.0.46.tar.gz -P /tmp
 
@@ -34,6 +34,7 @@ ExecStop=/opt/tomcat/latest/bin/shutdown.sh
 [Install]
 WantedBy=multi-user.target
 EOF
+sudo mv /tmp/tomcat.service /etc/systemd/system/tomcat.service
 sudo systemctl daemon-reload
 sudo systemctl start tomcat
 sudo systemctl enable tomcat
